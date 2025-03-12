@@ -50,7 +50,7 @@ public static void rota(int[][]arr1){
     for(int i =  0 ;  i < n ; i++){
     for(int  j = i ; j < m  ;j++ ){
         int temp = arr1[i][j] ; 
-        arr1[i][j]=arr1[j][n-i] ; 
+        
         arr1[j][n-i]=temp;
     }
     }
