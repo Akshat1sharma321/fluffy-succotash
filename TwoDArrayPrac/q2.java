@@ -1,4 +1,3 @@
-package TwoDArrayPrac;
 import java.util.*;
 public class q2 {
     static boolean FindSaddle(int[][]arr,int n ,int m){
@@ -41,6 +40,6 @@ public class q2 {
         if(FindSaddle(arr,n,m)==false ){
             System.out.println("No Saddle Point") ;
         }
-
+    
     }
 }

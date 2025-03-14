@@ -1,5 +1,3 @@
-package TwoDArrayPrac;
-
 public class q3 {
     int[][] rotateMatrix(int M, int N, int Mat[][]) {
         // code here

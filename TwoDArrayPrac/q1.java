@@ -1,5 +1,3 @@
-package TwoDArrayPrac;
-
 public class q1 {
     //Diagonal Traversal 
     class Solution {
