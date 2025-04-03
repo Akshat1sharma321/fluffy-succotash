@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class class7 {
     public static void printAllMazePaths(int row , int col , int dr , int dc , String psf){
         if(row==dr && col==dc){
@@ -59,13 +61,34 @@ public class class7 {
         int maxSumforv = maxSumPath(row, col+1, n, m, matrix);
         return matrix[row][col]+ Math.max(maxSumforh,maxSumforv);
     }
+    static String [] letterArray = {",:","<;","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"} ;
+    public static ArrayList<String> getKBC(String s){
+        if(s.length()==0){
+            ArrayList<String>base=new ArrayList<>() ; 
+            base.add("");
+            return base ;
+        }
+        int fd = s.charAt(0) - '0' ;
+        String rem = s.substring(1);
+        ArrayList<String>smallerans = getKBC(rem);
+        ArrayList<String>ans = new ArrayList<>() ;
+        String letter = letterArray[fd] ;  
+        for(int i = 0 ; i < letter.length() ; i++){
+            char st = letter.charAt(i) ; 
+            for(String an : smallerans){
+                ans.add(an+st);
+            }
+        }
+        return ans ; 
+    }
     public static void main(String[] args) {
         System.out.println("Hello");
         // printAllMazePaths(0, 0, 4, 4, "");
         // printEncoding("1234", "");
         // perm("abc", "");
-        int [][]mat = {{1,-5,4,10,11},{4,-11,13,3,49},{-19,16,5,14,12},{-14,8,15,19,6}};
-        int ans  = maxSumPath(0, 0, 4, 5, mat);
+        // int [][]mat = {{1,-5,4,10,11},{4,-11,13,3,49},{-19,16,5,14,12},{-14,8,15,19,6}};
+        // int ans  = maxSumPath(0, 0, 4, 5, mat);
+        ArrayList<String>ans = getKBC("523");
         System.out.println(ans);
     }
 }
