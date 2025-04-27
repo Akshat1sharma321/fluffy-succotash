@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class backtrackques {
     public static void floodfill(int row, int col, int n, int m, int mat[][], boolean[][] visited, String asf) {
@@ -85,7 +86,6 @@ public class backtrackques {
             System.out.println();
             return true;
         }
-        
 
         chess[row][col] = movenumber;
         int[][] dirs = { { -1, -2 }, { -2, -1 }, { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 1, -2 }, { 2, -1 } };
@@ -98,7 +98,6 @@ public class backtrackques {
         chess[row][col] = 0;
         return false;
     }
-    
 
     public static void printChess(int[][] placed) {
         int n = placed.length;
@@ -141,18 +140,19 @@ public class backtrackques {
         }
     }
 
-    public static void printCoinChangeCombination(int[]coins , int tar , int idx , String asf){
+    public static void printCoinChangeCombination(int[] coins, int tar, int idx, String asf) {
         // pcc(0 , tar , "" , coins) ;
-        if(tar==0){
+        if (tar == 0) {
             System.out.println(asf);
-            return ; 
-        } 
-        if(tar<0)return ; 
-        for(int i = idx ; i < coins.length ; i++){
+            return;
+        }
+        if (tar < 0)
+            return;
+        for (int i = idx; i < coins.length; i++) {
             printCoinChangeCombination(coins, tar - coins[i], i + 1, asf + coins[i]);
         }
     }
-    
+
     public static void printCoinChangeCombinationMultiple(int[] coins, int tar, int idx, String asf) {
         // pcc(0 , tar , "" , coins) ;
         if (tar == 0) {
@@ -165,82 +165,256 @@ public class backtrackques {
             printCoinChangeCombination(coins, tar - coins[i], i, asf + coins[i]);
         }
     }
-    public static void pcc(int idx , int target , String asf , int[]coins) {
-        if(idx==coins.length){
-            if(target==0){
-                 System.out.println(asf);
+
+    public static void pcc(int idx, int target, String asf, int[] coins) {
+        if (idx == coins.length) {
+            if (target == 0) {
+                System.out.println(asf);
             }
-            return ; 
+            return;
         }
-        pcc(idx+1, target - coins[idx], asf + coins[idx] + " ", coins);
+        pcc(idx + 1, target - coins[idx], asf + coins[idx] + " ", coins);
         pcc(idx + 1, target, asf, coins);
     }
-    
-    public static int friendsProblem(int n){
-        //Basically we are making one element single and then trying to make the paors  of it if we have 3 elements then if we start with 1st friend either it can be single or in pair for single  there  is only one option but for pair it can ha have pair with 2 or 3 and thus total pairs would be n-1 and if we go to 4 elements then we can have 3 pairs and each of two elemnts can be in 2 ways .....
-        if(n<=1) return 1 ; 
-        return friendsProblem(n-1) + (n-1)*friendsProblem(n-2) ; 
-    }
-    public static int josephus(int n,int k){
-        if(n==1){
-            return 0 ; 
-        }
-        int smallerans = josephus(n-1,k);
-        int ans = (smallerans+k)%n ; 
-        System.out.println("Person saafe --" + ans);
-        return ans  ; 
+
+    public static int friendsProblem(int n) {
+        // Basically we are making one element single and then trying to make the paors
+        // of it if we have 3 elements then if we start with 1st friend either it can be
+        // single or in pair for single there is only one option but for pair it can ha
+        // have pair with 2 or 3 and thus total pairs would be n-1 and if we go to 4
+        // elements then we can have 3 pairs and each of two elemnts can be in 2 ways
+        // .....
+        if (n <= 1)
+            return 1;
+        return friendsProblem(n - 1) + (n - 1) * friendsProblem(n - 2);
     }
 
-    public static  void solveSudoku(char[][]board){
-        ArrayList<int[]>emptyPlaces = new ArrayList<>() ; 
-        for(int i = 0  ; i < 9 ; i++){
-            for(int j = 0 ; j < 9 ; j++){
-                if(board[i][j]=='.'){
-                    emptyPlaces.add(new int[]{i,j});
+    public static int josephus(int n, int k) {
+        if (n == 1) {
+            return 0;
+        }
+        int smallerans = josephus(n - 1, k);
+        int ans = (smallerans + k) % n;
+        System.out.println("Person saafe --" + ans);
+        return ans;
+    }
+
+    public static void solveSudoku(char[][] board) {
+        ArrayList<int[]> emptyPlaces = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.') {
+                    emptyPlaces.add(new int[] { i, j });
                 }
             }
         }
-        fillSudoku(0,emptyPlaces,board);
+        fillSudoku(0, emptyPlaces, board);
     }
-    public static boolean fillSudoku(int idx , ArrayList<int[]> emptyPlaces , char[][]board ){
-        if(idx==emptyPlaces.size()){
-            return true  ; 
-        }
-        int row = emptyPlaces.get(idx)[0] ; 
-        int col = emptyPlaces.get(idx)[1] ; 
 
-        for(char num = '1' ; num <= '9' ; num++){
-            if(canplace(row, col, emptyPlaces, board, num)){
-                board[row][col] = num  ;  
-                boolean isSolved = fillSudoku(idx + 1, emptyPlaces, board) ; 
-                if(isSolved==true){
-                    return true ; 
+    public static boolean fillSudoku(int idx, ArrayList<int[]> emptyPlaces, char[][] board) {
+        if (idx == emptyPlaces.size()) {
+            return true;
+        }
+        int row = emptyPlaces.get(idx)[0];
+        int col = emptyPlaces.get(idx)[1];
+
+        for (char num = '1'; num <= '9'; num++) {
+            if (canplace(row, col, emptyPlaces, board, num)) {
+                board[row][col] = num;
+                boolean isSolved = fillSudoku(idx + 1, emptyPlaces, board);
+                if (isSolved == true) {
+                    return true;
                 }
                 board[row][col] = '.';
             }
         }
-        return false  ; 
+        return false;
     }
-    public static  boolean canplace(int row , int col , ArrayList<int[]> emptyPlaces , char[][]board , char num){
-        for(int i = 0 ; i < 9 ; i++){
-            if(board[row][i]==num) return false ; 
+
+    public static boolean canplace(int row, int col, ArrayList<int[]> emptyPlaces, char[][] board, char num) {
+        for (int i = 0; i < 9; i++) {
+            if (board[row][i] == num)
+                return false;
         }
         for (int j = 0; j < 9; j++) {
             if (board[j][col] == num)
                 return false;
         }
-        int rowStart = (row / 3)*3; 
-        int colStart = (col / 3)*3 ; 
-        for(int i  = rowStart ; i < rowStart + 3 ; i++){
-            for(int j = colStart ; j < colStart + 3 ; j++){
-                if(board[i][j]==num) return false ; 
+        int rowStart = (row / 3) * 3;
+        int colStart = (col / 3) * 3;
+        for (int i = rowStart; i < rowStart + 3; i++) {
+            for (int j = colStart; j < colStart + 3; j++) {
+                if (board[i][j] == num)
+                    return false;
             }
         }
 
-return true ; 
+        return true;
     }
-    
-    
+
+    public int totalNQueens(int n) {
+        int m = n;
+        boolean[] rows = new boolean[n];
+        boolean[] cols = new boolean[n];
+        boolean[] diags = new boolean[n + m - 1];
+        boolean[] adiags = new boolean[n + m - 1];
+        int ans = totSol(0, n, rows, cols, diags, adiags);
+        return ans;
+    }
+
+    public int totSol(int row, int n, boolean[] rows, boolean[] cols, boolean[] diags, boolean[] adiags) {
+        if (row == n)
+            return 1;
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (cols[i] == false && rows[row] == false && diags[row - i + n - 1] == false && adiags[row + i] == false) {
+                cols[i] = true;
+                rows[row] = true;
+                diags[row - i + n - 1] = true;
+                adiags[row + i] = true;
+                cnt += totSol(row + 1, n, rows, cols, diags, adiags);
+                cols[i] = false;
+                rows[row] = false;
+                diags[row - i + n - 1] = false;
+                adiags[row + i] = false;
+            }
+        }
+
+        return cnt;
+    }
+
+    public int setKthbittrue(int num, int k) {
+        int mask = (1 << k);
+        int newNum = num | mask;
+        return newNum;
+    }
+
+    public int setKthbitfalse(int num, int k) {
+        int mask = ~(1 << k);
+        int newNum = num & mask;
+        return newNum;
+    }
+
+    public boolean check(int n, int col, int row, int colVis, int diagVis, int adiagVis) {
+        if ((colVis & (1 << col)) > 0)
+            return false;
+        else if ((diagVis & (1 << row - col + n - 1)) > 0)
+            return false;
+        else if ((adiagVis & (1 << row + col)) > 0)
+            return false;
+        else
+            return true;
+    }
+
+    public int toNqueens(int n, int row, int colVis, int diagVis, int adiagVis) {
+        if (row == n)
+            return 1;
+        int cnt = 0;
+        for (int col = 0; col < n; col++) {
+            if (check(n, col, row, colVis, diagVis, adiagVis)) {
+                colVis = setKthbittrue(colVis, col);
+                diagVis = setKthbittrue(diagVis, row - col + n - 1);
+                adiagVis = setKthbittrue(adiagVis, col + row);
+                cnt += toNqueens(n, row + 1, colVis, diagVis, adiagVis);
+                colVis = setKthbitfalse(colVis, col);
+                diagVis = setKthbitfalse(diagVis, row - col + n - 1);
+                adiagVis = setKthbitfalse(adiagVis, col + row);
+            }
+        }
+        return cnt;
+    }
+
+    public void totQueens(int n) {
+        int colVis = 0, diagVis = 0, adiagVis = 0, row = 0;
+        System.out.println(toNqueens(n, row, colVis, diagVis, adiagVis));
+    }
+
+    public int generateAllParenthesis(int n) {
+        int cnt = 0;
+        String asf = "";
+        gen(n, asf, 0, 0);
+        return cnt;
+    }
+
+    public void gen(int n, String asf, int ob, int cb) {
+        if (ob == n) {
+            while (cb < ob) {
+                asf += ")";
+                cb++;
+            }
+            System.out.println(asf);
+            return;
+        }
+        if (ob < n) {
+            gen(n, asf + "(", ob + 1, cb);
+        }
+        if (cb < ob) {
+            gen(n, asf + ")", ob, cb + 1);
+        }
+    }
+
+    public boolean w(char[][] board, String word, int row, int col, boolean[][] vis, int idx) {
+        if (word.length() == idx) {
+            return true;
+        }
+        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || vis[row][col] == true
+                || board[row][col] != word.charAt(idx)) {
+            return false;
+        }
+        boolean wordFound = false;
+        vis[row][col] = true;
+        int[][] dr = { { 0, -1 }, { -1, 0 }, { 0, 1 }, { 1, 0 } };
+        for (int i = 0; i < 4; i++) {
+            int nrow = row + dr[i][0];
+            int ncol = col + dr[i][1];
+            // if (nrow >= 0 && ncol >= 0 && nrow < board.length && ncol < board[0].length
+            // && vis[nrow][ncol] != true) {
+            wordFound = wordFound || w(board, word, nrow, ncol, vis, idx + 1);
+            // }
+        }
+        vis[row][col] = false;
+        return wordFound;
+    }
+
+    public void gen(int n, int ob, int cb, String asf, List<String> ans) {
+        if (ob == n) {
+            while (cb < ob) {
+                asf += ")";
+                cb++;
+            }
+            ans.add(asf);
+            return;
+        }
+        if (ob < n) {
+            gen(n, ob + 1, cb, asf + "(", ans);
+        }
+        if (cb < ob) {
+            gen(n, ob, cb + 1, asf + ")", ans);
+        }
+
+    }
+
+    public List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<>();
+        gen(n, 0, 0, "", ans);
+        return ans;
+    }
+
+    public boolean exist(char[][] board, String word) {
+        int n = board.length;
+        int m = board[0].length;
+        boolean[][] vis = new boolean[n][m];
+        boolean ans = false;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    ans = ans || w(board, word, i, j, vis, 0);
+                }
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         // int[][] chess = new int[8][8];
         // knightsTour(chess, 1, 0, 0);
@@ -264,19 +438,24 @@ return true ;
         // printCoinChangePermutations(coins, 10, "", visited);
         // printCoinChangePermutationsmul(coins, 10, "");
         // printCoinChangeCombination(coins, 10 , 0 ,"");
-        
-        System.out.println(josephus(5,3));
-        char[][] board = {
-                { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
-                { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
-                { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
-                { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
-                { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
-                { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
-                { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
-                { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
-                { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
-        };
-        solveSudoku(board);
+
+        // System.out.println(josephus(5,3));
+        // char[][] board = {
+        // { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
+        // { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
+        // { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
+        // { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
+        // { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
+        // { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
+        // { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
+        // { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
+        // { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
+        // };
+        // solveSudoku(board);
+
+        System.out.println(1 << 3);
+        backtrackques a = new backtrackques();
+        a.generateAllParenthesis(3);
+
     }
 }
