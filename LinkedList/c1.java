@@ -5,9 +5,10 @@ public class c1 {
         Scanner sc = new Scanner(System.in) ; 
         for(int i = 0 ; i < 4 ; i++){
             int data = sc.nextInt() ; 
-            Node i  = new Node(data) ; 
+            Node in  = new Node(data) ; 
         }
          System.out.println("hello");
+         sc.close() ; 
     }
 }
 

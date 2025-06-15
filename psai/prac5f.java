@@ -1,4 +1,4 @@
-package psai;
+// package psai;
 
 public class prac5f {
     static class SharedCounter {

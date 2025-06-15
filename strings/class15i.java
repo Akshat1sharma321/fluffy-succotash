@@ -23,6 +23,7 @@ public class class15i {
     Scanner scn = new Scanner(System.in) ; 
     String str = scn.next() ;
     compress(str);
+    scn.close() ; 
     }
    
     

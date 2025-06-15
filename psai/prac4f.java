@@ -1,4 +1,4 @@
-package psai;
+// package psai;
 
 public class prac4f {
     static class BankAccount {
