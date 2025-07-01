@@ -1,3 +1,4 @@
+package basics;
 import java.util.* ; 
 public class class12 {
  public static void spi(int[][]arr1){

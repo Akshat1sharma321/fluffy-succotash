@@ -1,3 +1,4 @@
+package basics;
 import java.util.*;
 public class prac {
     public static void pat1(int n){

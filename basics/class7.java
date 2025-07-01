@@ -1,3 +1,4 @@
+package basics;
 import java.util.*;
 public class class7 {
     public static int sp(int arr[] ){

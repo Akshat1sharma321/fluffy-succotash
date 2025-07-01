@@ -1,3 +1,4 @@
+package basics;
 public class TwoDarray {
   public static void main(String[] args){
     int [][] arr1 = {

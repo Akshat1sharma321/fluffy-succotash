@@ -1,3 +1,4 @@
+package basics;
 public class class10 {
     public static int binarySearch(int [] arr , int target){
         int low = 0 ; 
