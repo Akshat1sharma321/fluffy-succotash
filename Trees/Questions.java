@@ -31,12 +31,15 @@ public class Questions {
         for (Node child : root.children) {
             removeLeaf(child);
         }
-        for(int i = 0 ; i < sz ; i++){
+        for(int i = sz-1; i >=0 ; i--){
             Node child = root.children.get(i) ; 
             if(child.children.size()==0){
                 root.children.remove(i) ; 
             }
         }
+        // for (Node child : root.children) {
+        //     removeLeaf(child);
+        // }
         
     }
     public static void main(String[] args) {
