@@ -1,0 +1,19 @@
+// We have been given a task to buy and sell a stock so that we can make the maximum profit from it 
+// In general we will make a 3-D DP in which we will store dp[i][k][x] --- Maximum profit on ith day
+// here i means the number of day , k means the number of trasaction , x means tha number of stocks we are holding 
+// maximum profit after ith day for k transaction with x number of stocks holding 
+// in these problems we have only one stock which we have to buy and sell so x can be 0 and 1 only ....
+// whenever we buy we increase the number of transaction coz if we buy we'll sell definitely that will make the transaction 
+// dp[i][k][0] = means that ya to we did nt do any thing or we sell the stock we were having previously dp[i-1][k][1] + prices[i]
+// dp[i][k][1] = means that ya to we did nt do any thing or we buy the stock dp[i-1][k-1][0] - prices[i]
+//Base cases 
+// lets suppose dp[-1][k][0] = 0 
+// dp[-1][k][1] = -inf
+// dp[i][0][0] = 0 
+// dp[i][0][1] = -inf 
+
+// if we dont have transaction limit remove limit factor 
+// if we have limit add limit loop 
+// if we have a cooldownn time then add skip the day 
+// add transaction fee 
+// if we are dependent on just two variables use just vars 

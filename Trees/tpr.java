@@ -206,6 +206,7 @@ public class tpr {
         }
     }
    } 
+   
    //Mirror of the generic tree 
    public static TreeNode mirror(TreeNode root){
     int i = 0 ; 
